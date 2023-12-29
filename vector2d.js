@@ -3,7 +3,7 @@
 //////////////////////////////////////////////////////////////////////////////
 let canvas;
 let ctx;
-let player = {location:{x:0,y:0}, speed:{x:50,y:100} };
+let player = {location:{x:100,y:100}, speed:{x:0,y:0} };
 let target = {location: {x:0,y:0}, active:false};
 let lastframetime;
 let deltatime;

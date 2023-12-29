@@ -16,6 +16,7 @@ function init() {
 	canvas = document.getElementById("c");
 	ctx = canvas.getContext("2d");
 	canvas.addEventListener("click",handleClick);
+	canvas.addEventListener("mousemove",handleMouseMove);
 	lastframetime = deltatime = Date.now();
 }
 
@@ -65,6 +66,13 @@ function handleClick(e) {
 	player.speed = normalize(player.speed);
 	player.speed.x *= 100;
 	player.speed.y *= 100;
+}
+
+function handleMouseMove(e) {
+	// if the button is held, set and move the target
+	if (e.buttons >= 1) {
+		handleClick(e);
+	}
 }
 
 function mainLoop() {

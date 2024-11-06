@@ -3,8 +3,10 @@
 //////////////////////////////////////////////////////////////////////////////
 let canvas;
 let ctx;
-let player = {location:{x:100,y:100}, speed:{x:0,y:0} };
-let target = {location: {x:0,y:0}, active:false};
+let player = {location:{x:100,y:100}, speed:{x:0,y:0}, fillStyle:'black' };
+let target = {location: {x:0,y:0}, active:false, fillStyle:'red'};
+const OBJ_SIZE = 32;
+const MAX_SPEED = 100;
 let lastframetime;
 let framecount = 0;
 
@@ -40,18 +42,20 @@ function update() {
 
 function render() {
 	// clear screen
-	ctx.fillStyle = 'lightgray';
-	ctx.fillRect(0,0,canvas.width, canvas.height);
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
 
 	// draw target
 	if (target.active) {
-		ctx.fillStyle = 'red';
-		ctx.fillRect(target.location.x-16, target.location.y-16, 32, 32);
+		drawObject(target);
 	}
 
 	// draw player
-	ctx.fillStyle = 'black';
-	ctx.fillRect(player.location.x-16, player.location.y-16, 32, 32);
+	drawObject(player);
+}
+
+function drawObject(a) {
+	ctx.fillStyle = a.fillStyle;
+	ctx.fillRect(a.location.x-(OBJ_SIZE/2), a.location.y-(OBJ_SIZE/2), OBJ_SIZE, OBJ_SIZE);
 }
 
 function handleClick(e) {

@@ -9,6 +9,7 @@ const OBJ_SIZE = 32;
 const MAX_SPEED = 100;
 let lastframetime;
 let framecount = 0;
+const scaleFactor = window.devicePixelRatio || 1;
 
 //////////////////////////////////////////////////////////////////////////////
 // Engine functions
@@ -19,6 +20,10 @@ function init() {
 	canvas.addEventListener("click",handleClick);
 	canvas.addEventListener("mousemove",handleMouseMove);
 	lastframetime = Date.now();
+
+	canvas.width = canvas.clientWidth * scaleFactor;
+	canvas.height = canvas.clientHeight * scaleFactor;
+	ctx.scale(scaleFactor,scaleFactor);
 }
 
 function update() {
@@ -60,8 +65,8 @@ function drawObject(a) {
 
 function handleClick(e) {
 	// move and activate target
-	target.location.x = e.x;
-	target.location.y = e.y;
+	target.location.x = e.x / scaleFactor;
+	target.location.y = e.y / scaleFactor;
 	target.active = true;
 
 	// direct player toward the target

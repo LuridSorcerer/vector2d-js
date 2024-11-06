@@ -85,19 +85,15 @@ function mainLoop() {
 // Vector functions
 //////////////////////////////////////////////////////////////////////////////
 function getDistance(a,b) {
-	return Math.sqrt( ((a.x - b.x)**2) + ((a.y - b.y)**2) );
-}
-
-function getVectorLength(a) {
-	return Math.sqrt( (a.x*a.x) + (a.y*a.y) );
+	return Math.hypot( b.x - a.x, b.y - a.y );
 }
 
 function normalize(a) {
-	let l = getVectorLength(a);
-	let r = {x:0, y:0};
-	if (a.x != 0) { r.x = a.x / l;}
-	if (a.y != 0) { r.y = a.y / l;}
-	return r;
+	let l = Math.hypot(a.x, a.y);
+	if (l === 0) {
+		return {x:NaN, y:NaN };
+	}
+	return {x: a.x/l, y: a.y/l}; 
 }
 
 //////////////////////////////////////////////////////////////////////////////

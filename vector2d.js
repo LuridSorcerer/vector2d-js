@@ -19,6 +19,7 @@ function init() {
 	ctx = canvas.getContext("2d");
 	canvas.addEventListener("click",handleClick);
 	canvas.addEventListener("mousemove",handleMouseMove);
+	window.addEventListener('resize',handleResize);
 	lastframetime = Date.now();
 
 	canvas.width = canvas.clientWidth * scaleFactor;
@@ -78,6 +79,12 @@ function handleMouseMove(e) {
 	if (e.buttons >= 1) {
 		handleClick(e);
 	}
+}
+
+function handleResize() {
+	canvas.width = canvas.clientWidth * scaleFactor;
+	canvas.height = canvas.clientHeight * scaleFactor;
+	ctx.scale(scaleFactor,scaleFactor);
 }
 
 function mainLoop() {

@@ -73,8 +73,8 @@ function handleClick(e) {
 	player.speed.x = target.location.x - player.location.x; 
 	player.speed.y = target.location.y - player.location.y;
 	player.speed = normalize(player.speed);
-	player.speed.x *= 100;
-	player.speed.y *= 100;
+	player.speed.x *= MAX_SPEED;
+	player.speed.y *= MAX_SPEED;
 }
 
 function handleMouseMove(e) {

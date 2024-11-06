@@ -6,7 +6,6 @@ let ctx;
 let player = {location:{x:100,y:100}, speed:{x:0,y:0} };
 let target = {location: {x:0,y:0}, active:false};
 let lastframetime;
-let deltatime;
 let framecount = 0;
 
 //////////////////////////////////////////////////////////////////////////////
@@ -17,13 +16,14 @@ function init() {
 	ctx = canvas.getContext("2d");
 	canvas.addEventListener("click",handleClick);
 	canvas.addEventListener("mousemove",handleMouseMove);
-	lastframetime = deltatime = Date.now();
+	lastframetime = Date.now();
 }
 
 function update() {
 	// update delta time
-	deltatime = Date.now() - lastframetime;
-	lastframetime = Date.now();
+	const currentTime = Date.now();
+	const deltatime = currentTime - lastframetime;
+	lastframetime = currentTime;
 
 	// move player
 	player.location.x += player.speed.x * (deltatime/1000);
@@ -90,9 +90,7 @@ function getDistance(a,b) {
 
 function normalize(a) {
 	let l = Math.hypot(a.x, a.y);
-	if (l === 0) {
-		return {x:NaN, y:NaN };
-	}
+	if (l === 0) { return {x:NaN, y:NaN }; }
 	return {x: a.x/l, y: a.y/l}; 
 }
 

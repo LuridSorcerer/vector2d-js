@@ -26,11 +26,7 @@ function init() {
 	ctx.scale(scaleFactor,scaleFactor);
 }
 
-function update() {
-	// update delta time
-	const currentTime = Date.now();
-	const deltatime = currentTime - lastframetime;
-	lastframetime = currentTime;
+function update(deltatime) {
 
 	// move player
 	player.location.x += player.speed.x * (deltatime/1000);
@@ -85,7 +81,12 @@ function handleMouseMove(e) {
 }
 
 function mainLoop() {
-	update();
+	// update delta time
+	const currentTime = Date.now();
+	const deltatime = currentTime - lastframetime;
+	lastframetime = currentTime;
+
+	update(deltatime);
 	render();
 	requestAnimationFrame(mainLoop);
 }
